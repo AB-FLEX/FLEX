@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARLIX-BAX FLEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00c6ff;
+            --primary-dark: #0072ff;
+            --secondary: #ff3a5e;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --success: #10b981;
+            --danger: #ff3a5e;
+            --warning: #f59e0b;
+            --flex-gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 198, 255, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255, 58, 94, 0.08) 0%, transparent 25%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--light);
+            position: relative;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-main {
+            background: var(--flex-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.05em;
+        }
+        
+        .logo-full {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            position: absolute;
+            bottom: -1.2rem;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            color: var(--gray);
+        }
+        
+        nav {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .intro-section {
+            text-align: center;
+            margin: 5rem 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .intro-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: var(--flex-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            font-weight: 900;
+        }
+        
+        .intro-section p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+        
+        .scroll-down-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: none;
+            color: white;
+            text-decoration: none;
+            background: var(--flex-gradient);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .scroll-down-btn:hover {
+            transform: translateY(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            margin: 4rem 0;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.4rem 2rem;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            color: white;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--flex-gradient);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .btn-primary {
+            background: var(--flex-gradient);
+        }
+        
+        .btn-primary:hover {
+            background: var(--flex-gradient);
+            box-shadow: 0 12px 24px rgba(0, 198, 255, 0.3);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+        }
+        
+        .content-section {
+            margin: 5rem 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .content-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--flex-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+        
+        .content-section p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        #credits {
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 4rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--flex-gradient);
+            border-radius: 0 0 4px 4px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--flex-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes flexPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .intro-section h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .intro-section p {
+                font-size: 1.1rem;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-full {
+                position: static;
+                margin-top: 0.5rem;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .intro-section h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 1.2rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            #credits {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="info/flex.png" alt="FLEX Logo">
+                <div>
+                    <div class="logo-main">FLEX</div>
+                    <div class="logo-full">ARLIX-BAX FLEX</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#" class="btn">Home</a>
+                <a href="#solutions" class="btn">Solutions</a>
+                <a href="#contact" class="btn">Connect</a>
+            </nav>
+        </header>
+        
+        <section class="intro-section">
+            <h1>Innovation Without Boundaries</h1>
+            <p>At our company, People can get Mostly Open-source Free Product, Everything created by Aarav Singh Latwal</p>
+            <p>Explore our portfolio to see how we're redefining flexibility in the tech industry, or jump straight to our product offerings below.</p>
+            <a href="#solutions" class="scroll-down-btn">
+                <i class="fas fa-arrow-down"></i> Learn More
+            </a>
+        </section>
+        
+        <section class="content-section">
+            <h2>Our Philosophy</h2>
+            <p>Flexibility isn't just our name - it's our core principle. In a world of rapid technological change, rigid solutions become obsolete quickly. We build systems that evolve with your needs, ensuring long-term value and adaptability.</p>
+            <p>Our team of engineers, designers, and thinkers collaborate across disciplines to create solutions that are as versatile as they are powerful.</p>
+        </section>
+        
+        <section id="solutions" class="content-section">
+            <h2>Our Solutions</h2>
+            <p>Discover the range of flexible solutions we offer. Each product is designed to work independently or integrate seamlessly with others in our ecosystem.</p>
+            
+            <div class="button-grid">
+                <a href="info/portfolio.pdf" class="btn btn-primary" target="_blank">
+                    <i class="fas fa-folder-open"></i> Open Portfolio
+                </a>
+                <a href="games.html" class="btn btn-danger">
+                    <i class="fas fa-gamepad"></i> Flex Games
+                </a>
+                <a href="language.html" class="btn btn-success">
+                    <i class="fas fa-language"></i> Language Tools
+                </a>
+                <a href="apps.html" class="btn btn-warning">
+                    <i class="fas fa-mobile-alt"></i> Flex Apps
+                </a>
+                <a href="os.html" class="btn">
+                    <i class="fas fa-desktop"></i> Flex OS
+                </a>
+                <a href="hardware.html" class="btn">
+                    <i class="fas fa-microchip"></i> Flex Hardware
+                </a>
+                <a href="#credits" class="btn">
+                    <i class="fas fa-heart"></i> Credits
+                </a>
+                <a href="products.html" class="btn">
+                    <i class="fas fa-box-open"></i> More Products
+                </a>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <h2>Why Choose FLEX?</h2>
+            <p>Unlike traditional tech companies that offer one-size-fits-all solutions, we provide building blocks that you can combine and configure to meet your exact requirements. Our technology grows with you, eliminating the need for costly replacements as your needs evolve.</p>
+            <p>From startups to enterprises, our clients appreciate the freedom our solutions provide while maintaining enterprise-grade reliability and security.</p>
+        </section>
+        
+        <section id="credits" class="content-section">
+            <h2>Credits</h2>
+            <p>ARLIX-BAX FLEX is made possible by the contributions of many talented individuals and open-source projects:</p>
+            <p><strong>Core Team:</strong> Alex Rivera, Bex Zhang, Flexington Core</p>
+            <p><strong>Design:</strong> Creative Flex Group</p>
+            <p><strong>Engineering:</strong> Flex Labs Engineering Team</p>
+            <p><strong>Special Thanks:</strong> Open Source Community, Our Early Adopters</p>
+            <p>This project uses several open-source libraries including React, Three.js, and TensorFlow.js.</p>
+        </section>
+        
+        <section id="contact" class="content-section">
+            <h2>Get In Touch</h2>
+            <p>Ready to explore how our flexible solutions can work for you? Contact our team to discuss your project requirements.</p>
+            <div class="button-grid">
+                <a href="mailto:contact@arlixbaxflex.com" class="btn">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="contact.html" class="btn">
+                    <i class="fas fa-comments"></i> Contact Form
+                </a>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-logo">FLEX</div>
+            <p>ARLIX-BAX FLEX © 2023. All rights reserved.</p>
+            <p>Flexibility engineered for tomorrow's challenges.</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    btn.style.transform = 'translateY(-5px) scale(1.02)';
+                    btn.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.2)';
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translateY(0) scale(1)';
+                    btn.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.15)';
+                });
+            });
+            
+            // Scroll animation for credits section
+            const creditsSection = document.getElementById('credits');
+            if (creditsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeIn 1s ease-out';
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(creditsSection);
+            }
+        });
+    </script>
+</body>
+</html>
